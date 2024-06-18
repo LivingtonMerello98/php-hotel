@@ -73,6 +73,21 @@ $hotels = [
                                 <th>Distance to Center</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            <?php
+                            // Per ogni oggetto presente all'interno dell'array associativo, stampiamo le chiavi e i valori
+                            foreach ($hotels as $hotel) {
+                                //con <tr></tr> creiamo la riga che ospitera il dato che sarà stampato
+                                echo '<tr>';
+                                echo '<td>' . $hotel['name'] . '</td>';
+                                echo '<td>' . $hotel['description'] . '</td>';
+                                echo '<td>' . ($hotel['parking'] ? 'Yes' : 'No') . '</td>';
+                                echo '<td>' . $hotel['vote'] . '</td>';
+                                echo '<td>' . $hotel['distance_to_center'] . ' km</td>';
+                                echo '</tr>';
+                            }
+                            ?>
+                        </tbody>
                     </table>
                 </div>
             </div>
