@@ -39,6 +39,9 @@ $hotels = [
     ],
 
 ];
+
+// controllo se il parametro 'parking' è stato inviato tramite GET
+$filterByParking = isset($_GET['parking']);
 ?>
 
 <!DOCTYPE html>
@@ -59,39 +62,50 @@ $hotels = [
                 <h1 class="mb-3">Hotels</h1>
                 <p>find your next adventure</p>
             </div>
-            <div class="col-12 ">
-                <div>
-                    <!-- creiamo la tabella -->
-                    <table class="table table-bordered table-striped">
-                        <thead class="thead-dark">
-                            <tr>
-                                <!-- con <th></th> creiamo la casella per la tipologia di dato che vogliamo ricevere nella colonna-->
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Parking</th>
-                                <th>Vote</th>
-                                <th>Distance to Center</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            // Per ogni oggetto presente all'interno dell'array associativo, stampiamo le chiavi e i valori
-                            foreach ($hotels as $hotel) {
-                                //con <tr></tr> creiamo la riga che ospitera il dato che sarà stampato
-                                echo '<tr>';
-                                echo '<td>' . $hotel['name'] . '</td>';
-                                echo '<td>' . $hotel['description'] . '</td>';
-                                echo '<td>' . ($hotel['parking'] ? 'Yes' : 'No') . '</td>';
-                                echo '<td>' . $hotel['vote'] . '</td>';
-                                echo '<td>' . $hotel['distance_to_center'] . ' km</td>';
-                                echo '</tr>';
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+            <div>
+                <div class="col-12 bg-dark-subtle text-white rounded mb-3 py-2 ">
+                    <h2 class="mx-3">Partnership Hotels</h2>
                 </div>
+                <!-- creiamo il form -->
+                <form action="index.php" method="GET" class="form-inline my-3">
+                    <div class="form-group mr-3">
+                        <label for="parking" class="mr-2">Filtra per parcheggi</label>
+                        <input type="checkbox" id="parking" name="parking" class="form-check-input">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Filtra</button>
+                </form>
+
+                <!-- creiamo la tabella -->
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <!-- con <th></th> creiamo la casella per la tipologia di dato che vogliamo ricevere nella colonna-->
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Parking</th>
+                            <th>Vote</th>
+                            <th>Distance to Center</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        // Per ogni oggetto presente all'interno dell'array associativo, stampiamo le chiavi e i valori
+                        foreach ($hotels as $hotel) {
+                            //con <tr></tr> creiamo la riga che ospitera il dato che sarà stampato
+                            echo '<tr>';
+                            echo '<td>' . $hotel['name'] . '</td>';
+                            echo '<td>' . $hotel['description'] . '</td>';
+                            echo '<td>' . ($hotel['parking'] ? 'Yes' : 'No') . '</td>';
+                            echo '<td>' . $hotel['vote'] . '</td>';
+                            echo '<td>' . $hotel['distance_to_center'] . ' km</td>';
+                            echo '</tr>';
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </div>
+    </div>
     </div>
 
 
