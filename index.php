@@ -67,13 +67,23 @@ $filterByParking = isset($_GET['parking']);
                     <h2 class="mx-3">Partnership Hotels</h2>
                 </div>
                 <!-- creiamo il form -->
+
                 <form action="index.php" method="GET" class="form-inline my-3">
-                    <div class="form-group mr-3">
-                        <label for="parking" class="mr-2">Filtra per parcheggi</label>
-                        <input type="checkbox" id="parking" name="parking" class="form-check-input">
+                    <div class="col">
+                        <div class="d-flex">
+                            <div class="col-6 d-flex align-items-center">
+                                <div class="form-group mr-3">
+                                    <label for="parking" class="mr-2">Filtra per parcheggi</label>
+                                    <input type="checkbox" id="parking" name="parking" class="form-check-input mx-3">
+                                </div>
+                            </div>
+                            <div class="col-6 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-secondary ">filtra</i></button>
+                            </div>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Filtra</button>
                 </form>
+
 
                 <!-- creiamo la tabella -->
                 <table class="table table-bordered table-striped">
@@ -91,14 +101,15 @@ $filterByParking = isset($_GET['parking']);
                         <?php
                         // Per ogni oggetto presente all'interno dell'array associativo, stampiamo le chiavi e i valori
                         foreach ($hotels as $hotel) {
-                            //con <tr></tr> creiamo la riga che ospitera il dato che sarà stampato
-                            echo '<tr>';
-                            echo '<td>' . $hotel['name'] . '</td>';
-                            echo '<td>' . $hotel['description'] . '</td>';
-                            echo '<td>' . ($hotel['parking'] ? 'Yes' : 'No') . '</td>';
-                            echo '<td>' . $hotel['vote'] . '</td>';
-                            echo '<td>' . $hotel['distance_to_center'] . ' km</td>';
-                            echo '</tr>';
+                            if (!$filterByParking || ($filterByParking && $hotel['parking'])) {
+                                echo '<tr>';
+                                echo '<td>' . htmlspecialchars($hotel['name']) . '</td>';
+                                echo '<td>' . htmlspecialchars($hotel['description']) . '</td>';
+                                echo '<td>' . ($hotel['parking'] ? 'Yes' : 'No') . '</td>';
+                                echo '<td>' . htmlspecialchars($hotel['vote']) . '</td>';
+                                echo '<td>' . htmlspecialchars($hotel['distance_to_center']) . ' km</td>';
+                                echo '</tr>';
+                            }
                         }
                         ?>
                     </tbody>
